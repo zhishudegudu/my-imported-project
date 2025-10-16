@@ -44,14 +44,36 @@ int main() {
     }
     printf("Client connected\n");
 
-    // 5. 接收并发送数据
+    // 5. 持续接收并发送数据
     char buffer[BUFFER_SIZE] = {0};
-    recv(new_socket, buffer, BUFFER_SIZE, 0);
-    printf("Received from client: %s\n", buffer);
+    while (1) {
+        // 接收客户端消息
+        memset(buffer, 0, BUFFER_SIZE);
+        int valread = recv(new_socket, buffer, BUFFER_SIZE, 0);
+        if (valread < 0) {
+            perror("Receive failed");
+            break;
+        } else if (valread == 0) {
+            printf("Client disconnected\n");
+            break;
+        }
+        printf("Received from client: %s\n", buffer);
 
-    char* response = "Hello from server!";
-    send(new_socket, response, strlen(response), 0);
-    printf("Response sent\n");
+        // 检查是否为退出命令
+        if (strcmp(buffer, "exit") == 0) {
+            printf("Server exiting...\n");
+            // 发送退出确认
+            char* response = "Server closing connection";
+            send(new_socket, response, strlen(response), 0);
+            break;
+        }
+
+        // 准备回复消息
+        char response[BUFFER_SIZE] = {0};
+        sprintf(response, "Server received: %s", buffer);
+        send(new_socket, response, strlen(response), 0);
+        printf("Response sent\n");
+    }
 
     // 6. 关闭连接
     close(new_socket);

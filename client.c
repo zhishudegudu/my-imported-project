@@ -37,13 +37,38 @@ int main() {
     printf("Connected to server %s:%d\n", SERVER_IP, PORT);
 
     // 3. 发送并接收数据
-    char* message = "Hello from client!";
-    send(sock, message, strlen(message), 0);
-    printf("Message sent\n");
+    printf("Type 'exit' to quit\n");
 
+    // 3. 持续发送并接收数据
     char buffer[BUFFER_SIZE] = {0};
-    recv(sock, buffer, BUFFER_SIZE, 0);
-    printf("Received from server: %s\n", buffer);
+    while (1) {
+        // 输入要发送的消息
+        printf("Enter message: ");
+        fgets(buffer, BUFFER_SIZE, stdin);
+        // 移除 fgets 自动添加的换行符
+        buffer[strcspn(buffer, "\n")] = '\0';
+
+        // 发送数据
+        send(sock, buffer, strlen(buffer), 0);
+
+        // 检查是否为退出命令
+        if (strcmp(buffer, "exit") == 0) {
+            printf("Client exiting...\n");
+            break;
+        }
+
+        // 接收服务器回复
+        memset(buffer, 0, BUFFER_SIZE);
+        int valread = recv(sock, buffer, BUFFER_SIZE, 0);
+        if (valread < 0) {
+            perror("Receive failed");
+            break;
+        } else if (valread == 0) {
+            printf("Server disconnected\n");
+            break;
+        }
+        printf("Received from server: %s\n", buffer);
+    }
 
     // 4. 关闭连接
     close(sock);
