@@ -1,6 +1,6 @@
 套接字网络通信
 
-git clone ssh://git@www.bitbucket.czyp.com:7999/ute/clustercomm.git
+git clone ssh://git@github.com:zhishudegudu/my-imported-project.git
 #替换为实际的仓库路径
 
 
