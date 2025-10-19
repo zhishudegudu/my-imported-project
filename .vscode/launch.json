@@ -1,0 +1,100 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        // TCP 服务器调试配置
+        {
+            "name": "Launch TCP Server",  // 调试名称（下拉选择时显示）
+            "type": "cppdbg",             // 调试类型（C/C++ 用 cppdbg）
+            "request": "launch",          // 启动模式
+            "program": "${workspaceFolder}/server",  // 可执行文件路径
+            "args": [],                   // 命令行参数（无则空）
+            "stopAtEntry": false,         // 是否在 main 入口处自动暂停（true 则暂停）
+            "cwd": "${workspaceFolder}",  // 工作目录（项目根目录）
+            "environment": [],
+            "externalConsole": false,     // 不使用外部控制台（用 VS Code 内置终端）
+            "MIMode": "gdb",              // 调试器（WSL 用 gdb）
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build server",  // 调试前先执行编译任务（对应 tasks.json 的 label）
+            "miDebuggerPath": "/usr/bin/gdb", // gdb 路径（WSL 中默认路径）
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "logging": {
+                "moduleLoad": false
+            }
+        },
+        // TCP 客户端调试配置
+        {
+            "name": "Launch TCP Client",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/client",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "build client",  // 对应编译 client 的任务
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        // UDP 服务器调试配置
+        {
+            "name": "Launch UDP Server",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/udp_server",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "build udp_server",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        // UDP 客户端调试配置
+        {
+            "name": "Launch UDP Client",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/udp_client",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "build udp_client",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

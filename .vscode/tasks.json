@@ -1,0 +1,78 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // 编译TCP服务器（对应launch中的"build server"）
+        {
+            "type": "cppbuild",
+            "label": "build server",  // 必须与launch.json的preLaunchTask一致
+            "command": "/usr/bin/gcc",  // WSL中的gcc路径
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",  // 生成调试信息
+                "server.c",  // 源文件：TCP服务器
+                "-o",
+                "${workspaceFolder}/server"  // 输出可执行文件
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": "build",
+            "detail": "用gcc编译TCP服务器"
+        },
+        // 编译TCP客户端（对应launch中的"build client"）
+        {
+            "type": "cppbuild",
+            "label": "build client",  // 与launch中client的preLaunchTask一致
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "client.c",  // 源文件：TCP客户端
+                "-o",
+                "${workspaceFolder}/client"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": "build",
+            "detail": "用gcc编译TCP客户端"
+        },
+        // 编译UDP服务器（对应launch中的"build udp_server"）
+        {
+            "type": "cppbuild",
+            "label": "build udp_server",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "udp_server.c",  // 源文件：UDP服务器
+                "-o",
+                "${workspaceFolder}/udp_server"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": "build",
+            "detail": "用gcc编译UDP服务器"
+        },
+        // 编译UDP客户端（对应launch中的"build udp_client"）
+        {
+            "type": "cppbuild",
+            "label": "build udp_client",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "udp_client.c",  // 源文件：UDP客户端
+                "-o",
+                "${workspaceFolder}/udp_client"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": "build",
+            "detail": "用gcc编译UDP客户端"
+        }
+    ]
+}
