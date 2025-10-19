@@ -1,5 +1,9 @@
 套接字网络通信
 
+！！！需要更新到wsl2否则调试模式会出现报错&"warning: GDB: Failed to set controlling terminal: Operation not permitted\n" [1] + Done "/usr/bin/gdb" --interpreter=mi --tty=${DbgTerm} 0<"/tmp/Microsoft-MIEngine-In-0izyhm0a.jxm" 1>"/tmp/Microsoft-MIEngine-Out-fqqcizi2.sap" wu@DESKTOP-8758D50:~/work/my-imported-project$
+<img width="2048" height="1120" alt="image" src="https://github.com/user-attachments/assets/f028503d-ef8c-40c8-84e0-131ad82e72c4" />
+
+
 git clone ssh://git@github.com:zhishudegudu/my-imported-project.git
 #替换为实际的仓库路径
 
